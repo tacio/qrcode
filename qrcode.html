@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QR Code Generator</title>
+  <!-- Include the QRCode library from a CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 2em;
+    }
+    #qrcode {
+      margin-top: 1em;
+    }
+    #qrtext {
+      margin-top: 1em;
+      font-size: 1.2em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>QR Code Generator</h1>
+  <!-- Container where the QR code will be rendered -->
+  <div id="qrcode"></div>
+  <!-- Container to display the text below the QR code -->
+  <div id="qrtext"></div>
+
+  <script>
+    // Parse the "text" query parameter from the URL
+    const params = new URLSearchParams(window.location.search);
+    const qrText = params.get('text') || 'Default QR Code Text';
+
+    // Generate the QR code
+    new QRCode(document.getElementById("qrcode"), {
+      text: qrText,
+      width: 256,
+      height: 256,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.H
+    });
+
+    // Display the text below the QR code
+    document.getElementById("qrtext").textContent = qrText;
+  </script>
+</body>
+</html>
+
